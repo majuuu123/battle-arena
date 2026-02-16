@@ -1,0 +1,22 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate docker-compose file
+        run: docker compose config
+
+      - name: Check project structure
+        run: |
+          echo "Checking project structure..."
