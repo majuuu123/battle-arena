@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'user-service'
+    static_configs:
+      - targets: ['user-service:3001']
+
+  - job_name: 'battle-service'
+    static_configs:
+      - targets: ['battle-service:3002']
+
+  - job_name: 'matchmaking-service'
+    static_configs:
+      - targets: ['matchmaking-service:3003']
+
+  - job_name: 'stats-service'
+    static_configs:
+      - targets: ['stats-service:3004']
