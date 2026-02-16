@@ -20,5 +20,3 @@ jobs:
       - name: Check project structure
         run: |
           echo "Checking project structure..."
-          ls -la
-          ls -la services/
