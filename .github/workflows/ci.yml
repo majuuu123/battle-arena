@@ -20,3 +20,15 @@ jobs:
       - name: Check project structure
         run: |
           echo "Checking project structure..."
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Test User Service
+        working-directory: services/user-service
+        run: |
+          npm install
+          npm test
+          npm run lint
