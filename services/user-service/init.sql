@@ -9,3 +9,12 @@ CREATE TABLE IF NOT EXISTS users (
     losses INTEGER DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS battles (
+    id SERIAL PRIMARY KEY,
+    player1_id INTEGER REFERENCES users(id),
+    player2_id INTEGER REFERENCES users(id),
+    winner_id INTEGER REFERENCES users(id),
+    battle_log TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
