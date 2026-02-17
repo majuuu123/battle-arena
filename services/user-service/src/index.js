@@ -49,6 +49,4 @@ const server = app.listen(PORT, () => {
   console.log(`User service running on port ${PORT}`);
 });
 
-server.close = server.close.bind(server);
-
-module.exports = app;
+module.exports = server;
