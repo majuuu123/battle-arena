@@ -45,8 +45,8 @@ app.get('/metrics', async (req, res) => {
   res.send(await register.metrics());
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`User service running on port ${PORT}`);
 });
 
-module.exports = app;
+module.exports = server;
