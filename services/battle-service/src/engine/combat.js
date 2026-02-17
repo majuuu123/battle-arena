@@ -4,6 +4,8 @@ const MAX_TURNS = 10;
 
 function calculateDamage(attacker, defender) {
   const baseDamage = attacker.attack - Math.floor(defender.defense / 2);
+  // NOSONAR: Math.random() is intentional here - used for game combat
+  // randomness only, not for security or cryptographic purposes
   const randomBonus = Math.floor(Math.random() * 6) + 1;
   return Math.max(1, baseDamage + randomBonus);
 }

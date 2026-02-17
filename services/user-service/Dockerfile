@@ -6,8 +6,16 @@ RUN npm ci --omit=dev
 
 # Production stage
 FROM node:20-alpine
+
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
 WORKDIR /app
 COPY --from=builder /app/node_modules ./node_modules
 COPY src ./src
+
+RUN chown -R appuser:appgroup /app
+
+USER appuser
+
 EXPOSE 3001
 CMD ["node", "src/index.js"]
