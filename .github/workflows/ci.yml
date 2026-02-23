@@ -58,9 +58,27 @@ jobs:
           npm test
           npm run lint
 
+  test-stats-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Test Stats Service
+        working-directory: services/stats-service
+        run: |
+          npm install
+          npm test
+          npm run lint
+
   docker-build:
     runs-on: ubuntu-latest
-    needs: [test-user-service, test-battle-service]
+    needs: [test-user-service, test-battle-service, test-stats-service]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
