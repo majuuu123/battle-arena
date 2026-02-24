@@ -99,5 +99,31 @@ services:
       timeout: 5s
       retries: 5
 
+  matchmaking-service:
+    build: ./services/matchmaking-service
+    ports:
+      - "3003:3003"
+    environment:
+      PORT: 3003
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: battleuser
+      DB_PASSWORD: battlepass123
+      DB_NAME: battledb
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+      BATTLE_SERVICE_URL: http://battle-service:3002
+      STATS_SERVICE_URL: http://stats-service:3004
+      ALLOWED_ORIGIN: http://localhost:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3003/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 volumes:
   postgres_data:
