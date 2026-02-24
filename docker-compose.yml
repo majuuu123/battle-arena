@@ -125,5 +125,20 @@ services:
       timeout: 5s
       retries: 5
 
+  gateway:
+    build: ./gateway
+    ports:
+      - "80:80"
+    depends_on:
+      - user-service
+      - battle-service
+      - matchmaking-service
+      - stats-service
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
 volumes:
   postgres_data:
