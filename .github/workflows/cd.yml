@@ -1,0 +1,46 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Render
+        run: |
+          echo "Deploying to Render..."
+          echo "Render auto-deploys on main branch push"
+          echo "Services will be available at:"
+          echo "  - User Service: https://battle-arena-user-service.onrender.com"
+          echo "  - Battle Service: https://battle-arena-battle-service.onrender.com"
+          echo "  - Stats Service: https://battle-arena-stats-service.onrender.com"
+
+      - name: Wait for deployment
+        run: sleep 60
+
+      - name: Health Check - User Service
+        run: |
+          curl --fail --retry 5 --retry-delay 10 \
+            https://battle-arena-user-service.onrender.com/health || exit 1
+
+      - name: Health Check - Battle Service
+        run: |
+          curl --fail --retry 5 --retry-delay 10 \
+            https://battle-arena-battle-service.onrender.com/health || exit 1
+
+      - name: Health Check - Stats Service
+        run: |
+          curl --fail --retry 5 --retry-delay 10 \
+            https://battle-arena-stats-service.onrender.com/health || exit 1
+
+      - name: Deployment Success
+        run: |
+          echo "Deployment successful!"
+          echo "All services are healthy and responding"

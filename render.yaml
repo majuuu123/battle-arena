@@ -1,0 +1,103 @@
+services:
+  # PostgreSQL Database
+  - type: pserv
+    name: battle-arena-db
+    env: docker
+    plan: free
+    region: frankfurt
+    envVars:
+      - key: POSTGRES_USER
+        value: battleuser
+      - key: POSTGRES_PASSWORD
+        generateValue: true
+      - key: POSTGRES_DB
+        value: battledb
+
+  # User Service
+  - type: web
+    name: battle-arena-user-service
+    env: docker
+    dockerfilePath: ./services/user-service/Dockerfile
+    dockerContext: ./services/user-service
+    plan: free
+    region: frankfurt
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: DB_HOST
+        fromService:
+          name: battle-arena-db
+          type: pserv
+          property: host
+      - key: DB_PORT
+        value: 5432
+      - key: DB_USER
+        value: battleuser
+      - key: DB_PASSWORD
+        fromService:
+          name: battle-arena-db
+          type: pserv
+          envVarKey: POSTGRES_PASSWORD
+      - key: DB_NAME
+        value: battledb
+      - key: JWT_SECRET
+        generateValue: true
+    healthCheckPath: /health
+
+  # Battle Service
+  - type: web
+    name: battle-arena-battle-service
+    env: docker
+    dockerfilePath: ./services/battle-service/Dockerfile
+    dockerContext: ./services/battle-service
+    plan: free
+    region: frankfurt
+    envVars:
+      - key: PORT
+        value: 3002
+      - key: DB_HOST
+        fromService:
+          name: battle-arena-db
+          type: pserv
+          property: host
+      - key: DB_PORT
+        value: 5432
+      - key: DB_USER
+        value: battleuser
+      - key: DB_PASSWORD
+        fromService:
+          name: battle-arena-db
+          type: pserv
+          envVarKey: POSTGRES_PASSWORD
+      - key: DB_NAME
+        value: battledb
+    healthCheckPath: /health
+
+  # Stats Service
+  - type: web
+    name: battle-arena-stats-service
+    env: docker
+    dockerfilePath: ./services/stats-service/Dockerfile
+    dockerContext: ./services/stats-service
+    plan: free
+    region: frankfurt
+    envVars:
+      - key: PORT
+        value: 3004
+      - key: DB_HOST
+        fromService:
+          name: battle-arena-db
+          type: pserv
+          property: host
+      - key: DB_PORT
+        value: 5432
+      - key: DB_USER
+        value: battleuser
+      - key: DB_PASSWORD
+        fromService:
+          name: battle-arena-db
+          type: pserv
+          envVarKey: POSTGRES_PASSWORD
+      - key: DB_NAME
+        value: battledb
+    healthCheckPath: /health
