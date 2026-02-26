@@ -1,0 +1,13 @@
+{
+  "name": "battle-arena-e2e-tests",
+  "version": "1.0.0",
+  "description": "End-to-end tests for Battle Arena microservices",
+  "scripts": {
+    "test": "jest --runInBand --forceExit",
+    "test:verbose": "jest --runInBand --forceExit --verbose"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "axios": "^1.6.0"
+  }
+}
