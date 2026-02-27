@@ -1,103 +1,114 @@
-services:
-  # PostgreSQL Database
-  - type: pserv
-    name: battle-arena-db
-    env: docker
+databases:
+  - name: battle-arena-db
+    databaseName: battledb
+    user: battleuser
     plan: free
     region: frankfurt
-    envVars:
-      - key: POSTGRES_USER
-        value: battleuser
-      - key: POSTGRES_PASSWORD
-        generateValue: true
-      - key: POSTGRES_DB
-        value: battledb
 
+services:
   # User Service
   - type: web
-    name: battle-arena-user-service
+    name: battle-arena-user
+    plan: free
     env: docker
+    region: frankfurt
     dockerfilePath: ./services/user-service/Dockerfile
     dockerContext: ./services/user-service
-    plan: free
-    region: frankfurt
     envVars:
       - key: PORT
-        value: 3001
+        value: 10000
       - key: DB_HOST
-        fromService:
+        fromDatabase:
           name: battle-arena-db
-          type: pserv
           property: host
       - key: DB_PORT
-        value: 5432
-      - key: DB_USER
-        value: battleuser
-      - key: DB_PASSWORD
-        fromService:
+        fromDatabase:
           name: battle-arena-db
-          type: pserv
-          envVarKey: POSTGRES_PASSWORD
+          property: port
+      - key: DB_USER
+        fromDatabase:
+          name: battle-arena-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: battle-arena-db
+          property: password
       - key: DB_NAME
-        value: battledb
+        fromDatabase:
+          name: battle-arena-db
+          property: database
       - key: JWT_SECRET
         generateValue: true
+      - key: ALLOWED_ORIGIN
+        value: "*"
     healthCheckPath: /health
 
-  # Battle Service
+  # Battle Service  
   - type: web
-    name: battle-arena-battle-service
+    name: battle-arena-battle
+    plan: free
     env: docker
+    region: frankfurt
     dockerfilePath: ./services/battle-service/Dockerfile
     dockerContext: ./services/battle-service
-    plan: free
-    region: frankfurt
     envVars:
       - key: PORT
-        value: 3002
+        value: 10000
       - key: DB_HOST
-        fromService:
+        fromDatabase:
           name: battle-arena-db
-          type: pserv
           property: host
       - key: DB_PORT
-        value: 5432
-      - key: DB_USER
-        value: battleuser
-      - key: DB_PASSWORD
-        fromService:
+        fromDatabase:
           name: battle-arena-db
-          type: pserv
-          envVarKey: POSTGRES_PASSWORD
+          property: port
+      - key: DB_USER
+        fromDatabase:
+          name: battle-arena-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: battle-arena-db
+          property: password
       - key: DB_NAME
-        value: battledb
+        fromDatabase:
+          name: battle-arena-db
+          property: database
+      - key: ALLOWED_ORIGIN
+        value: "*"
     healthCheckPath: /health
 
   # Stats Service
   - type: web
-    name: battle-arena-stats-service
+    name: battle-arena-stats
+    plan: free
     env: docker
+    region: frankfurt
     dockerfilePath: ./services/stats-service/Dockerfile
     dockerContext: ./services/stats-service
-    plan: free
-    region: frankfurt
     envVars:
       - key: PORT
-        value: 3004
+        value: 10000
       - key: DB_HOST
-        fromService:
+        fromDatabase:
           name: battle-arena-db
-          type: pserv
           property: host
       - key: DB_PORT
-        value: 5432
-      - key: DB_USER
-        value: battleuser
-      - key: DB_PASSWORD
-        fromService:
+        fromDatabase:
           name: battle-arena-db
-          type: pserv
-          envVarKey: POSTGRES_PASSWORD
+          property: port
+      - key: DB_USER
+        fromDatabase:
+          name: battle-arena-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: battle-arena-db
+          property: password
       - key: DB_NAME
-        value: battledb
+        fromDatabase:
+          name: battle-arena-db
+          property: database
+      - key: ALLOWED_ORIGIN
+        value: "*"
     healthCheckPath: /health
