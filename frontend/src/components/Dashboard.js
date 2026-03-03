@@ -40,7 +40,7 @@ function Dashboard({ user, apiUrl }) {
   return (
     <div>
       <div className="card">
-        <h2>Welcome back, {user.username}! 👋</h2>
+        <h2>Welcome back, {user.username}!</h2>
         <p style={{ color: '#666', marginTop: '0.5rem' }}>
           Ready to dominate the arena?
         </p>
@@ -66,7 +66,7 @@ function Dashboard({ user, apiUrl }) {
       </div>
 
       <div className="card">
-        <h3>⚔️ Combat Stats</h3>
+        <h3>Combat Stats</h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginTop: '1rem' }}>
           <div>
             <strong style={{ color: '#667eea' }}>Attack:</strong> {stats.attack}

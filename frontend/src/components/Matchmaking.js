@@ -140,7 +140,7 @@ function Matchmaking({ user, apiUrl }) {
   return (
     <div>
       <div className="card">
-        <h2>🎮 Matchmaking</h2>
+        <h2>Matchmaking</h2>
         <p style={{ color: '#666', marginBottom: '2rem' }}>
           Join the queue and we'll automatically match you with an opponent!
         </p>
@@ -171,21 +171,21 @@ function Matchmaking({ user, apiUrl }) {
 
         {!inQueue && !battleResult && (
           <button onClick={joinQueue} className="btn-primary">
-            🎯 Join Matchmaking Queue
+            Join Matchmaking Queue
           </button>
         )}
 
         {inQueue && searching && !battleResult && (
           <div>
             <div className="queue-status pulse">
-              <h3>⏳ Searching for opponent...</h3>
+              <h3>Searching for opponent...</h3>
               <p>You are in the matchmaking queue</p>
               <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
                 When another player joins, the battle will start automatically!
               </p>
             </div>
             <button onClick={leaveQueue} className="btn-secondary">
-              ❌ Leave Queue
+              Leave Queue
             </button>
           </div>
         )}
@@ -194,7 +194,7 @@ function Matchmaking({ user, apiUrl }) {
       {battleResult && (
         <div className="card">
           <h3 style={{ textAlign: 'center', marginBottom: '1rem' }}>
-            {battleResult.won ? '🎉 VICTORY!' : '💀 DEFEAT!'}
+            {battleResult.won ? 'VICTORY!' : 'DEFEAT!'}
           </h3>
           
           <div style={{ 
@@ -231,7 +231,7 @@ function Matchmaking({ user, apiUrl }) {
               className="btn-secondary"
               style={{ flex: 1 }}
             >
-              🔄 Queue Again
+              Queue Again
             </button>
           </div>
         </div>
@@ -239,7 +239,7 @@ function Matchmaking({ user, apiUrl }) {
 
       {!battleResult && (
         <div className="card">
-          <h3>ℹ️ How Matchmaking Works</h3>
+          <h3>How Matchmaking Works</h3>
           <ul style={{ marginLeft: '1.5rem', lineHeight: '1.8' }}>
             <li>Join the queue and wait for another player</li>
             <li>When 2 players are in queue, a battle automatically starts</li>

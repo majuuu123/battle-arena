@@ -44,7 +44,7 @@ function App() {
       <div className="App">
         {user && (
           <nav className="navbar">
-            <div className="nav-brand">⚔️ Battle Arena</div>
+            <div className="nav-brand">Battle Arena</div>
             <div className="nav-links">
               <Link to="/dashboard">Dashboard</Link>
               <Link to="/battle">Battle</Link>
@@ -53,7 +53,7 @@ function App() {
               <Link to="/history">History</Link>
             </div>
             <div className="nav-user">
-              <span>👤 {user.username}</span>
+              <span>{user.username}</span>
               <button onClick={handleLogout} className="btn-logout">Logout</button>
             </div>
           </nav>
