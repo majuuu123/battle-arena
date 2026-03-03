@@ -4,8 +4,6 @@ const MAX_TURNS = 10;
 
 function calculateDamage(attacker, defender) {
   const baseDamage = attacker.attack - Math.floor(defender.defense / 2);
-  // NOSONAR: Math.random() is intentional here - used for game combat
-  // randomness only, not for security or cryptographic purposes
   const randomBonus = Math.floor(Math.random() * 6) + 1;
   return Math.max(1, baseDamage + randomBonus);
 }
@@ -17,7 +15,7 @@ function simulateBattle(player1, player2) {
   const log = [];
   let turn = 1;
 
-  log.push(`⚔️  Battle starts: ${p1.username} vs ${p2.username}`);
+  log.push(`Battle starts: ${p1.username} vs ${p2.username}`);
   log.push(`${p1.username} - HP: ${p1.currentHp} | ATK: ${p1.attack} | DEF: ${p1.defense}`);
   log.push(`${p2.username} - HP: ${p2.currentHp} | ATK: ${p2.attack} | DEF: ${p2.defense}`);
   log.push('─────────────────────────────────');
@@ -46,7 +44,7 @@ function simulateBattle(player1, player2) {
   }
 
   log.push('─────────────────────────────────');
-  log.push(`🏆 ${winner.username} wins the battle!`);
+  log.push(`${winner.username} wins the battle!`);
 
   return {
     winner,
