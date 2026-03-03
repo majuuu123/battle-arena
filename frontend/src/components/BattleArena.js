@@ -50,7 +50,7 @@ function BattleArena({ user, apiUrl }) {
   return (
     <div>
       <div className="card">
-        <h2>⚔️ Battle Arena</h2>
+        <h2>Battle Arena</h2>
         <p style={{ color: '#666', marginBottom: '2rem' }}>
           Choose your opponent and engage in combat!
         </p>
@@ -84,14 +84,14 @@ function BattleArena({ user, apiUrl }) {
           className="btn-primary"
           disabled={loading || !selectedOpponent}
         >
-          {loading ? 'Fighting...' : '⚔️ Start Battle!'}
+          {loading ? 'Fighting...' : 'Start Battle!'}
         </button>
       </div>
 
       {battleResult && (
         <div className="card">
           <h3>
-            {battleResult.winner === user.username ? '🎉 Victory!' : '💀 Defeat!'}
+            {battleResult.winner === user.username ? 'Victory!' : 'Defeat!'}
           </h3>
           <p style={{ fontSize: '1.2rem', margin: '1rem 0' }}>
             <strong>{battleResult.winner}</strong> defeated <strong>{battleResult.loser}</strong> in {battleResult.turns} turns!

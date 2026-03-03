@@ -46,7 +46,7 @@ function BattleHistory({ user, apiUrl }) {
   return (
     <div>
       <div className="card">
-        <h2>📜 Battle History</h2>
+        <h2>Battle History</h2>
         <p style={{ color: '#666', marginBottom: '2rem' }}>
           Your recent battles and combat records
         </p>
@@ -121,7 +121,7 @@ function BattleHistory({ user, apiUrl }) {
 
       {selectedBattle && (
         <div className="card">
-          <h3>⚔️ Battle Details</h3>
+          <h3>Battle Details</h3>
           <div style={{ 
             display: 'grid', 
             gridTemplateColumns: '1fr 1fr', 

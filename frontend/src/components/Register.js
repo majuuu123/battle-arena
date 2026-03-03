@@ -48,7 +48,7 @@ function Register({ onRegister, apiUrl }) {
   return (
     <div className="auth-container">
       <div className="card">
-        <h2 className="text-center">⚔️ Battle Arena</h2>
+        <h2 className="text-center">Battle Arena</h2>
         <p className="text-center" style={{ marginBottom: '2rem', color: '#666' }}>
           Create your warrior account
         </p>
