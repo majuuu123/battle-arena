@@ -28,17 +28,17 @@ jobs:
       - name: Health Check - User Service
         run: |
           curl --fail --retry 5 --retry-delay 10 \
-            https://battle-arena-user-service.onrender.com/health || exit 1
+           https://battle-arena-user.onrender.com || exit 1
 
       - name: Health Check - Battle Service
         run: |
           curl --fail --retry 5 --retry-delay 10 \
-            https://battle-arena-battle-service.onrender.com/health || exit 1
+            https://battle-arena-battle.onrender.com/health || exit 1
 
       - name: Health Check - Stats Service
         run: |
           curl --fail --retry 5 --retry-delay 10 \
-            https://battle-arena-stats-service.onrender.com/health || exit 1
+            https://battle-arena-stats.onrender.com/health || exit 1
 
       - name: Deployment Success
         run: |
