@@ -24,7 +24,7 @@ class QueueManager {
         durable: true,
       });
 
-      console.log(`✓ Connected to RabbitMQ, queue: ${this.queueName}`);
+      console.log(` Connected to RabbitMQ, queue: ${this.queueName}`);
 
       this.startConsuming();
 
